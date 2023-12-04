@@ -1,0 +1,45 @@
+CREATE TABLE Aviones(
+id SERIAL PRIMARY KEY,
+numero_avion VARCHAR(20) UNIQUE NOT NULL,
+modelo VARCHAR (50) NOT NULL,
+peso DECIMAL NOT NULL,
+capacidad INTEGER NOT NULL
+);
+
+CREATE TABLE Hangares (
+	id SERIAL PRIMARY KEY,
+	numero_hangar VARCHAR(20) UNIQUE NOT NULL,
+	capacidad INTEGER NOT NULL,
+	localizacion VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Pilotos(
+	id SERIAL PRIMARY KEY,
+	numero_licencia VARCHAR(20) UNIQUE NOT NULL,
+	restricciones  VARCHAR(100),
+	salario DECIMAL NOT NULL,
+	turno VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE PilotoAvion(
+	id SERIAL PRIMARY KEY,
+	piloto_id INTEGER REFERENCES Pilotos(id),
+	avion_id INTEGER REFERENCES Aviones(id)
+	);
+
+Insert into Aviones (numero_avion, models, peso, capacidad) VALUES
+('AV001','Modelo1',5000,150),
+('AV002','Modelo2',6000,200);
+
+
+Insert into Hangares(numero_hangar,capacidad,localizacion) VALUES
+('H001',10,'Localizacion1'),
+('H002',15,'Localizacion2');
+
+Insert into Pilotos(numero_licencia,restricciones,salario,turno)VALUES
+('P001','Restricciones1',50000,'Mañana'),
+('P002','Restricciones2',60000,'Tarde');
+
+Insert into PilotoAvion (piloto_id, avion_id)VALUES
+(1,1),
+(2,2);
